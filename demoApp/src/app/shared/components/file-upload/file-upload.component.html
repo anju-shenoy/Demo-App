@@ -1,0 +1,13 @@
+<input
+  #file
+  type="file"
+  accept="image/*"
+  (change)="preview(file.files)"
+  id="imageUpload"
+  class="hide"
+/>
+<label for="imageUpload" class="btn">Profile Picture</label><br /><br />
+
+<div class="image-holder">
+  <img [src]="imgURL" style="max-width: 100%;" *ngIf="imgURL" alt="" />
+</div>

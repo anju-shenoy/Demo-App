@@ -1,0 +1,50 @@
+<div id="wrapper">
+  <section>
+    <div class="header"><b>DEMO APP</b></div>
+    <mat-card class="userInfo-card">
+      <mat-card-header>
+        <mat-card-title>Registration Info</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="col-1">
+          <div class="image-holder">
+            <img
+              [src]="imgURL"
+              style="max-width: 100%;"
+              *ngIf="imgURL"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <span class="userInfo">
+            I am {{ userInfo.firstName }} {{ userInfo.lastName }}​ {{ age }} .​
+            You can send yours emails to ​ {{ userInfo.email }}​ ​ . I live in
+            the state of {{ userInfo.state }}, {{ userInfo.country }}​​.
+            {{ hobbies }}
+            {{ newsLetter }}
+            {{ phone }}
+          </span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button
+            mat-stroked-button
+            color="primary"
+            routerLink="/registration"
+            [queryParams]="{ id: id }"
+          >
+            Edit
+          </button>
+          <button mat-stroked-button color="warn" routerLink="/registration">
+            cancel
+          </button>
+          <button mat-raised-button color="primary" (click)="onSubmit()">
+            Submit
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </section>
+</div>

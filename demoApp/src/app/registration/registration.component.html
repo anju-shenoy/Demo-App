@@ -1,0 +1,172 @@
+<div id="wrapper">
+  <section>
+    <div class="header"><b>DEMO APP</b></div>
+    <mat-card class="Login-card">
+      <mat-card-header>
+        <mat-card-title>Registration Page</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+          <div class="col-1">
+            <app-file-upload [id]="id"></app-file-upload>
+          </div>
+          <div class="col-2">
+            <div>
+              <mat-form-field appearance="legacy" class="firstName">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required />
+              </mat-form-field>
+              <mat-form-field appearance="legacy" class="lastName">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required />
+              </mat-form-field>
+              <div
+                class="empty_spacer"
+                *ngIf="
+                  registerFormControl.firstName.errors?.pattern ||
+                  registerFormControl.lastName.errors?.pattern
+                "
+              >
+                &nbsp;
+                <span class="error-msg">
+                  *Please enter a valid first name and Last name.
+                </span>
+              </div>
+            </div>
+            <div>
+              <mat-form-field appearance="legacy" class="longField">
+                <mat-label>Phone Number</mat-label>
+                <input
+                  matInput
+                  formControlName="phoneNumber"
+                  required
+                />
+              </mat-form-field>
+              <div
+                class="empty_spacer"
+                *ngIf="registerFormControl.phoneNumber.touched &&
+                  (registerFormControl.phoneNumber.errors?.minlength ||
+                    registerFormControl.phoneNumber.errors?.maxlength)"
+              >
+                &nbsp;
+                <span class="error-msg">
+                  *Please enter a valid phoneNumber(10 - 13 digits, only numbers
+                  and "+").
+                </span>
+              </div>
+            </div>
+            <div>
+              <label>Age:</label>
+              <ng5-slider
+                class="custom-slider"
+                [(value)]="value"
+                [options]="options"
+              ></ng5-slider>
+            </div>
+            <div>
+              <mat-form-field appearance="legacy" class="longField">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required />
+              </mat-form-field>
+
+              <span class="text-danger error-msg" *ngIf="false">
+                *Please enter a valid email id.
+              </span>
+            </div>
+            <div>
+              <mat-form-field appearance="legacy" class="country">
+                <mat-label>Country</mat-label>
+                <mat-select
+                  formControlName="country"
+                  (selectionChange)="getStates(1)"
+                >
+                  <mat-option
+                    *ngFor="let country of countriesStates"
+                    value="{{ country.country }}"
+                    >{{ country.country }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="legacy" class="state">
+                <mat-label>State</mat-label>
+                <mat-select formControlName="state">
+                  <mat-option
+                    *ngFor="let state of states"
+                    value="{{ state }}"
+                    >{{ state }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="legacy" class="longField">
+                <mat-label>Address Type</mat-label>
+                <mat-select
+                formControlName="addressType"
+                 (selectionChange)="enableAddress()">
+                  <mat-option value="1">Home</mat-option>
+                  <mat-option value="2">Company</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+            </div>
+            <div *ngIf="addressFlag">
+              <mat-form-field appearance="legacy" class="longField">
+                <mat-label>Address Line 1</mat-label>
+                <input matInput formControlName="address1" required />
+              </mat-form-field>
+            </div>
+            <div *ngIf="addressFlag">
+              <mat-form-field appearance="legacy" class="longField">
+                <mat-label>Address Line 2</mat-label>
+                <input matInput formControlName="address2" />
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="hobbie-chip">
+                <mat-chip-list #chipList aria-label="Hobby selection">
+                  <mat-chip
+                    *ngFor="let hobby of hobbies"
+                    [removable]="removable"
+                    (removed)="remove(hobby)"
+                  >
+                    {{ hobby }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Hobbies(Type and press enter)"
+                    #fruitInput
+                    [formControl]="hobbyCtrl"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-checkbox class="example-margin" formControlName="newsLetter">
+                Subscribe to the news letter
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div fxLayout="row" fxLayoutGap="20px">
+            <button
+              type="submit"
+              [disabled]="registrationForm.invalid"
+              mat-raised-button
+              color="primary"
+            >
+              Preview Data
+            </button>
+          </div>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </section>
+</div>
