@@ -156,34 +156,41 @@ export class RegistrationComponent implements OnInit {
   };
 
   onSubmit = () => {
-    let regestrationObject = [];
-
-    if (
-      localStorage.getItem('regData') === null ||
-      localStorage.getItem('regData') === undefined
-    ) {
-      regestrationObject = [];
-    } else {
-      for (
-        let i = 0;
-        i < JSON.parse(localStorage.getItem('regData')).length;
-        i++
+    if (localStorage.getItem('currentPhoto')) {
+      let regestrationObject = [];
+      if (
+        localStorage.getItem('regData') === null ||
+        localStorage.getItem('regData') === undefined
       ) {
-        regestrationObject.push(JSON.parse(localStorage.getItem('regData'))[i]);
+        regestrationObject = [];
+      } else {
+        for (
+          let i = 0;
+          i < JSON.parse(localStorage.getItem('regData')).length;
+          i++
+        ) {
+          regestrationObject.push(
+            JSON.parse(localStorage.getItem('regData'))[i]
+          );
+        }
       }
+      let regFormPrep = this.registrationForm.value;
+      regFormPrep.hobbies = this.hobbies;
+      regFormPrep.age = this.value;
+      regestrationObject.push(regFormPrep);
+      if (this.id) {
+        regestrationObject.splice(this.id, 1);
+      }
+      localStorage.setItem('regData', JSON.stringify(regestrationObject));
+      this._router.navigateByUrl(
+        `registration/userInfo?id=${
+          JSON.parse(localStorage.getItem('regData')).length - 1
+        }?  `
+      );
+    } else {
+      alert(
+        'Your photo is not uploaded / Error with uploading. Please Re-upload the photo and try again'
+      );
     }
-    let regFormPrep = this.registrationForm.value;
-    regFormPrep.hobbies = this.hobbies;
-    regFormPrep.age = this.value;
-    regestrationObject.push(regFormPrep);
-    if (this.id) {
-      regestrationObject.splice(this.id, 1);
-    }
-    localStorage.setItem('regData', JSON.stringify(regestrationObject));
-    this._router.navigateByUrl(
-      `registration/userInfo?id=${
-        JSON.parse(localStorage.getItem('regData')).length - 1
-      }?  `
-    );
   };
 }
