@@ -157,6 +157,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit = () => {
     let regestrationObject = [];
+
     if (
       localStorage.getItem('regData') === null ||
       localStorage.getItem('regData') === undefined

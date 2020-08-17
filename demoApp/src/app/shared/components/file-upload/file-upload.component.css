@@ -1,6 +1,7 @@
 .hide {
   display: none;
 }
+
 .btn {
   display: inline-block;
   padding: 8px 15px;
@@ -17,13 +18,15 @@
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
+
 .image-holder {
   height: 100px;
   margin-left: 22px;
   background-image: url("/assets/images/No_Profile_Image.png") !important;
   background-size: contain;
   background-repeat: no-repeat;
-  img {
-    margin-left: -15px;
-  }
+}
+
+.image-holder img {
+  margin-left: -15px;
 }

@@ -33,6 +33,30 @@
                 </span>
               </div>
             </div>
+
+            <div>
+              <label>Age:</label>
+              <ng5-slider
+                class="custom-slider"
+                [(value)]="value"
+                [options]="options"
+              ></ng5-slider>
+            </div>
+            <div>
+              <mat-form-field appearance="legacy" class="longField">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required />
+              </mat-form-field>
+              <div
+              class="empty_spacer"
+              *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.email "
+            >
+              &nbsp;
+              <span class="error-msg">
+                *Please enter a valid email id.
+              </span>
+            </div>
+            </div>
             <div>
               <mat-form-field appearance="legacy" class="longField">
                 <mat-label>Phone Number</mat-label>
@@ -54,24 +78,6 @@
                   and "+").
                 </span>
               </div>
-            </div>
-            <div>
-              <label>Age:</label>
-              <ng5-slider
-                class="custom-slider"
-                [(value)]="value"
-                [options]="options"
-              ></ng5-slider>
-            </div>
-            <div>
-              <mat-form-field appearance="legacy" class="longField">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" required />
-              </mat-form-field>
-
-              <span class="text-danger error-msg" *ngIf="false">
-                *Please enter a valid email id.
-              </span>
             </div>
             <div>
               <mat-form-field appearance="legacy" class="country">

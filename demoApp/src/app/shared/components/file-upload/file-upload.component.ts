@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FileUploadComponent implements OnInit {
   public imagePath;
-  @Input() id;
+  @Input() id ;
   imgURL: any;
   public message: string;
 
